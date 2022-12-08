@@ -1,9 +1,11 @@
 INPUT_FILE = './Day 6/input.txt'
 
+# FOR PART TWO, CHANGE THIS VALUE, FROM 4 TO 14
+LENGTH_OF_FLOW = 4
 
 def checkFlow(flow):
     setFlow = set(flow)
-    if (len(setFlow) == 4):
+    if (len(setFlow) == LENGTH_OF_FLOW):
         return True
     return False
 
@@ -12,7 +14,7 @@ with open(INPUT_FILE) as file:
     flow = []
     numFlow = 0
     for letter in line:
-        if len(flow) == 4:
+        if len(flow) == LENGTH_OF_FLOW:
             if checkFlow(flow):
                 break
             else:
