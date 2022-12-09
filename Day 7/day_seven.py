@@ -29,4 +29,4 @@ with open(INPUT_FILE) as file:
             sizeDir = 0
 
 
-print ("total size of directorys ffdfdf <= 100000: ", total)
+print ("total size of directorys <= 100000: ", total)
