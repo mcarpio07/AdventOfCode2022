@@ -10,68 +10,55 @@ def chargeMatrix(lines):
         matrix.append(fil)
     return matrix
 
-def getNumBorder(matrix):
-    numBorder = len(matrix[0])
-    numBorder += len(matrix[-1])
-    for i in range(2, len(matrix)): numBorder += 2
-    return  numBorder
-
-def checkVisible(matrix, fil, col):
+def calculateTrees(matrix, fil, col):
     height = matrix[fil][col]
-    visible = True
+    numLeft = 0
+    numRight = 0
+    numUp = 0
+    numDown = 0
 
     #FILE LEFT 
     for tree in reversed(matrix[fil][:col]):
+        numLeft += 1
         if tree >= height: 
-            visible = False
             break
-    if visible:
-        return True
 
     #FILE RIGHT
-    visible = True 
     for tree in matrix[fil][1+col:]:
+        numRight += 1
         if tree >= height: 
-            visible = False
             break
-    if visible:
-        return True
 
     #COLUMN UP
-    visible = True
     for j in reversed(range(fil)):
+        numUp += 1
         num = matrix[j][col]
         if num >= height:
-            visible = False
             break
-    if visible:
-        return True
 
     #COLUMN DOWN
-    visible = True
     for j in range(fil+1,len(matrix[fil])):
+        numDown += 1
         num = matrix[j][col]
         if num >= height:
-            visible = False
             break
-    if visible:
-        return True
 
-    return visible
+    return numLeft * numRight * numUp * numDown
 
 
 def letsPlay(matrix):
-    numVisibleTrees = getNumBorder(matrix)
+    maxScore = 0
     for i in range(1,len(matrix)-1):
         for j in range(1,len(matrix[0])-1):
-            if checkVisible(matrix, i, j):
-                numVisibleTrees += 1
-    return numVisibleTrees
+            scoreTrees = calculateTrees(matrix, i, j)
+            if scoreTrees > maxScore:
+                maxScore = scoreTrees
+    return maxScore
 
 
 with open(INPUT_FILE) as file:
     lines = file.readlines()
     matrix = chargeMatrix(lines)
-    numVisibleTrees = letsPlay(matrix)
+    maxScore = letsPlay(matrix)
     
-print("Total visible trees: ", numVisibleTrees)
+print("Max score trees: ", maxScore)
