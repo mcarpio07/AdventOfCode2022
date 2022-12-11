@@ -42,7 +42,6 @@ def moveT():
     ):
         posT['y'] = posT['y']+1
         posT['x'] = posT['x']+1
-        positionsT.add(tuple([posT['x'], posT['y']]))
 
     #DIAGONAL ↘
     if (
