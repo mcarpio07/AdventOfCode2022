@@ -15,9 +15,6 @@ def checkInterestingIntensity():
         return True
     return False
 
-def saveInterestingIntensity(value, totalCicles):
-    interestingIntensity.append(value*totalCicles)
-
 interestingIntensity = []
 with open(INPUT_FILE) as file:
     for line in file.readlines():
@@ -25,14 +22,14 @@ with open(INPUT_FILE) as file:
         if len(instruction) == 2:
             numCicles += 1
             totalCicles += 1
-            if checkInterestingIntensity(): saveInterestingIntensity(intensity, totalCicles)
+            if checkInterestingIntensity(): interestingIntensity.append(intensity*totalCicles)
             numCicles += 1
             totalCicles += 1
-            if checkInterestingIntensity(): saveInterestingIntensity(intensity, totalCicles)
+            if checkInterestingIntensity(): interestingIntensity.append(intensity*totalCicles)
             intensity += int (instruction[1])
         else:
             numCicles += 1
             totalCicles += 1
-            if checkInterestingIntensity(): saveInterestingIntensity(intensity, totalCicles)
+            if checkInterestingIntensity(): interestingIntensity.append(intensity*totalCicles)
 
 print ('Interesting intensity:', sum(interestingIntensity))
